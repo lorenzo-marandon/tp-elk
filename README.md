@@ -431,23 +431,26 @@ La visualisation a été enregistrée sous le nom `Somme des soldes`.
 
 - (Question) 13. Graphique barre affichant la moyenne des soldes (champ balance) selon l’état (champ state). Sauver le graphique.
 
+
 **Réponse :**
 
-Nous avons créé un histogramme vertical dans OpenSearch Dashboards pour représenter la répartition des comptes bancaires selon l'âge de leurs titulaires.
+Nous avons créé un graphique en barres verticales permettant de comparer la moyenne des soldes bancaires par État.
 
 Configuration :
 - **Index pattern :** `bank*`
-- **Type :** Vertical Bar
-- **Axe Y :** `Count`
-- **Axe X :** `Histogram`
-- **Champ :** `age`
-- **Intervalle :** `10`
+- **Type :** `Vertical Bar`
+- **Axe Y :** `Average` sur `balance`
+- **Axe X :** `Terms` sur `state.keyword`
+- **Tri :** moyenne des soldes décroissante
+- **Size :** `50`
 
-Cette visualisation permet de regrouper les titulaires par tranches d'âge de dix ans et de compter le nombre de comptes dans chacune.
+L'agrégation `Average` calcule le solde moyen de chaque État, tandis que `Terms` regroupe les comptes selon leur État.
 
-Le graphique obtenu montre que la tranche **30–39 ans** est la plus représentée, suivie des 20–29 ans, puis des 40–49 ans.
+D'après le graphique obtenu, le Colorado (`CO`) présente la moyenne la plus élevée, avec environ **32 500**, suivi du Nebraska (`NE`) et de l'Arizona (`AZ`).
 
-La visualisation a été enregistrée sous le nom `Répartition des comptes par âge`.
+À l'inverse, le Minnesota (`MN`) présente la moyenne la plus faible parmi les États affichés, autour de **19 600**.
+
+La visualisation a été enregistrée sous le nom `Solde moyen par État`.
 
 #Fin réponse
 
