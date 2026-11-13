@@ -331,12 +331,23 @@ GET /bank/_search
 }
 ```
 
-La requête `match_all` correspond à tous les documents présents dans l'index `bank`, sans appliquer de filtre.
+La requête retourne un code HTTP `200 OK`, avec **999 documents correspondants** (`hits.total.value = 999`).
 
-Par défaut, OpenSearch ne renvoie que les 10 premiers documents, même si la recherche correspond à davantage de résultats. Le nombre total de documents correspondants est indiqué par `hits.total.value`.
+Par défaut, OpenSearch ne renvoie que les 10 premiers résultats. Pour modifier ce nombre, nous utilisons le paramètre `size` :
 
-Le paramètre `size` permet de modifier le nombre de documents retournés dans la réponse.
+```http
+GET /bank/_search
+{
+  "size": 20,
+  "query": {
+    "match_all": {}
+  }
+}
+```
 
+Cette seconde requête retourne 20 documents, tandis que le nombre total de documents correspondants reste de 999.
+
+La requête `match_all` permet donc de sélectionner tous les documents d'un index sans appliquer de condition de filtrage.
 #Fin Réponse
 
 - (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
