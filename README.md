@@ -710,6 +710,35 @@ La différence de score illustre le fonctionnement du classement par pertinence 
 #Fin Réponse
 
 - (Question) 22. Modifier la requête pour que seul le quatrième document réponde.
+
+**Réponse :**
+
+Pour ne retrouver que le quatrième document de la question 20, nous imposons la présence simultanée des trois termes dans le champ `text_entry`.
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "text_entry:(caesar AND brutus AND calpurnia)"
+    }
+  }
+}
+```
+
+L'opérateur `AND` exige que les trois mots soient présents dans le même champ, contrairement à la recherche initiale qui utilisait implicitement `OR`.
+
+**Résultats obtenus :**
+- Code HTTP : `200 OK`
+- Nombre de documents : **1**
+- Identifiant : `46336`
+- Score : `6.0189724`
+- Pièce : *Julius Caesar*
+
+Nous retrouvons exactement le quatrième document de la question précédente, qui contient les trois termes recherchés dans une indication scénique.
+
+#Fin Réponse
+
 - (Question) 23. Rechercher les documents répondant à la requête cesar (la faute est volontaire)
 - (Question) 24. Pourquoi aucun document ne répond ?
 - (Question) 25. Essayez maintenant avec la requête cesar~ 
