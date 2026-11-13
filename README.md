@@ -41,6 +41,32 @@ bridge
 
 - (Question) Étudiez le fichier `docker-compose.yml` en vous aidant de la documentation https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/. Pour chaque service, expliquez son rôle, les ports exposés et les principaux paramètres (`discovery.type`, `node.roles`, `OPENSEARCH_JAVA_OPTS`, `healthcheck`, `depends_on`). Pourquoi la sécurité est-elle désactivée, et pourquoi ne faut-il jamais le faire en production ?
 
+
+### Réponse — Installation de la suite ELK
+
+Le fichier `docker-compose.yml` définit trois services fonctionnant dans des conteneurs Docker :
+
+- **OpenSearch** : moteur NoSQL permettant de stocker, indexer et rechercher des documents. Le port `9200` expose son API REST et le port `9600` est réservé à des fonctionnalités de surveillance.
+- **Logstash** : outil destiné à collecter, transformer et transmettre des données vers OpenSearch. Le port `5000` est publié pour permettre la réception de données.
+- **OpenSearch Dashboards** : interface web permettant d'explorer les données, d'exécuter des requêtes et de créer des visualisations. Elle est accessible sur le port `5601`.
+
+Les principaux paramètres sont les suivants :
+
+- `discovery.type=single-node` : configure OpenSearch comme un cluster à un seul nœud.
+- `node.roles=cluster_manager,data,ingest,ml` : attribue au nœud les rôles de gestion du cluster, stockage des données, ingestion et machine learning.
+- `OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g` : définit à 1 Go la taille initiale et maximale du tas mémoire Java.
+- `healthcheck` : vérifie périodiquement qu'OpenSearch répond correctement via son API REST.
+- `depends_on` : impose que le service OpenSearch soit déclaré sain avant le démarrage de Logstash et de Dashboards.
+
+Les trois conteneurs communiquent sur un réseau Docker de type `bridge`.
+
+La sécurité est désactivée avec `plugins.security.disabled=true` afin de simplifier les manipulations pédagogiques et d'éviter la configuration de l'authentification et des certificats TLS.
+
+Cette configuration ne doit pas être utilisée en production, car elle pourrait permettre à des utilisateurs non autorisés d'accéder aux données, de les modifier ou de les supprimer. En production, il faudrait notamment activer l'authentification, le chiffrement TLS et des contrôles d'accès adaptés.
+
+**Vérification :** les trois conteneurs ont été démarrés avec Docker Compose. L'API REST d'OpenSearch répond correctement, et la requête `GET /_cluster/health` retourne un statut `green`, avec un seul nœud et aucune partition non allouée.
+
+
 ## Préparation de la machine
 
 OpenSearch a besoin d'un paramètre noyau plus élevé que la valeur par défaut :
