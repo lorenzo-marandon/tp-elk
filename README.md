@@ -410,7 +410,46 @@ Avant de créer des visuels, déclarez l'index à OpenSearch Dashboards : menu `
 Aller ensuite sur l’onglet Visualize et créer les visuels suivants :
 
 - (Question) 12. Métrique affichant la somme des soldes de tous les comptes. Sauver le graphique.
+
+**Réponse :**
+
+Nous avons créé une visualisation de type **Metric** dans OpenSearch Dashboards en utilisant l'index pattern `bank*`.
+
+Configuration :
+- **Aggregation :** `Sum`
+- **Field :** `balance`
+- **Custom label :** `Somme des soldes`
+
+**Résultat :** la somme des soldes des 999 comptes bancaires est de **25 674 297**.
+
+Cette métrique permet d'additionner les valeurs du champ numérique `balance` pour tous les documents de l'index.
+
+La visualisation a été enregistrée sous le nom `Somme des soldes`.
+
 - (Question) 13. Graphique barre affichant la moyenne des soldes (champ balance) selon l’état (champ state). Sauver le graphique.
+
+**Réponse :**
+
+Nous avons créé un histogramme vertical dans OpenSearch Dashboards pour représenter la répartition des comptes bancaires selon l'âge de leurs titulaires.
+
+Configuration :
+- **Index pattern :** `bank*`
+- **Type :** Vertical Bar
+- **Axe Y :** `Count`
+- **Axe X :** `Histogram`
+- **Champ :** `age`
+- **Intervalle :** `10`
+
+Cette visualisation permet de regrouper les titulaires par tranches d'âge de dix ans et de compter le nombre de comptes dans chacune.
+
+Le graphique obtenu montre que la tranche **30–39 ans** est la plus représentée, suivie des 20–29 ans, puis des 40–49 ans.
+
+La visualisation a été enregistrée sous le nom `Répartition des comptes par âge`.
+
+#Fin réponse
+
+
+
 - (Question) 14. Nuage de mots représentant les villes dans lesquelles il y a le plus de comptes. Sauver le graphique.
 
 Rendez-vous ensuite sur l’onglet Dashboard puis : 
