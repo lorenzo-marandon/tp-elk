@@ -300,6 +300,22 @@ Dans notre cas, nous obtenons les informations du compte de Roberta Bender, dont
 
 - (Question) 8. Idem mais en ne sélectionnant que le nom et le prénom (firstname, lastname)
 
+**Réponse :**
+
+Pour récupérer uniquement le prénom et le nom du compte d'identifiant `2`, nous utilisons le paramètre `_source_includes` :
+
+```http
+GET /bank/_source/2?_source_includes=firstname,lastname
+```
+
+Ce paramètre permet de filtrer les champs retournés par l'API GET.
+
+Dans notre cas, seuls les champs `firstname` et `lastname` sont sélectionnés. Le résultat attendu contient `Roberta` et `Bender`.
+
+Cette méthode permet de limiter les données transmises lorsqu'on n'a besoin que de certaines informations d'un document.
+
+#Fin Réponse
+
 ### SEARCH API
 - (Question) 9. Retrouver tous les comptes
 - (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
