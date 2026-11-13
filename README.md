@@ -226,7 +226,7 @@ La réponse doit contenir `"found": false`, ce qui confirme que le document n'ex
 
   **Réponse :**
 
-Pour supprimer tous les comptes associés à la ville de Nicholson, nous utilisons l'API `_delete_by_query`, qui permet de supprimer plusieurs documents répondant à une condition.
+Pour supprimer tous les comptes dont la ville est `Nicholson`, nous utilisons l'API `_delete_by_query` avec une recherche exacte sur le champ `city.keyword`.
 
 ```http
 POST /bank/_delete_by_query
@@ -239,11 +239,11 @@ POST /bank/_delete_by_query
 }
 ```
 
-La requête `term` cible exactement la valeur `Nicholson` dans le champ `city.keyword`.
+Avant la suppression, une requête de recherche a permis d'identifier **un seul compte correspondant**, celui de Virginia Ayala, avec l'identifiant `_id: 25`.
 
-Contrairement à l'API Delete classique, qui supprime un document à partir de son identifiant, `_delete_by_query` supprime tous les documents correspondant au critère spécifié.
+La suppression a renvoyé `"deleted": 1`, sans erreur ni conflit.
 
-Nous vérifions ensuite le résultat avec :
+Nous avons ensuite vérifié le résultat :
 
 ```http
 GET /bank/_count
@@ -256,7 +256,8 @@ GET /bank/_count
 }
 ```
 
-Un résultat `count: 0` confirme qu'aucun compte correspondant à cette ville ne subsiste.
+**Résultat :** `"count": 0`. Tous les comptes de Nicholson ont donc été supprimés.
+
 
 #Fin Réponse
 
