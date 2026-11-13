@@ -378,6 +378,32 @@ Le nombre de résultats est indiqué par `hits.total.value = 2`.
 
 - (Question) 11. Retrouver tous les comptes dont la ville (champs city) est Belvoir ET l’employeur Xurban
 
+**Réponse :**
+
+Pour retrouver les comptes situés à Belvoir dont l'employeur est Xurban, nous utilisons une requête booléenne avec deux conditions `term` :
+
+```http
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        { "term": { "city.keyword": "Belvoir" } },
+        { "term": { "employer.keyword": "Xurban" } }
+      ]
+    }
+  }
+}
+```
+
+L'opérateur `bool.filter` impose que les deux conditions soient simultanément vérifiées, ce qui correspond à un ET logique.
+
+**Résultat :** un seul compte correspond aux critères (`hits.total.value = 1`). Il s'agit du compte `999`, appartenant à Dorothy Barron, dont le solde est de 6 087.
+
+Le score `_score` vaut `0`, car les clauses `filter` ne contribuent pas au calcul de pertinence.
+
+#Fin Réponse
+
 ## Visualisation des données avec OpenSearch Dashboards
 Avant de créer des visuels, déclarez l'index à OpenSearch Dashboards : menu `Dashboards Management` › `Index patterns` › `Create index pattern`, saisissez `bank`, puis validez.
 
