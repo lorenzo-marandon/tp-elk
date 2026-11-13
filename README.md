@@ -201,6 +201,27 @@ Le résultat attendu est une mise à jour de l'adresse, tandis que les autres in
 
 ### DELETE API
 - (Question) Supprimer le compte précédemment créé
+
+**Réponse :**
+
+Pour supprimer le compte précédemment créé, nous utilisons l'API Delete d'OpenSearch :
+
+```http
+DELETE /bank/_doc/10001
+```
+
+Cette requête supprime le document dont l'identifiant `_id` est `10001` dans l'index `bank`.
+
+Pour vérifier sa suppression :
+
+```http
+GET /bank/_doc/10001
+```
+
+La réponse doit contenir `"found": false`, ce qui confirme que le document n'existe plus dans l'index.
+
+#Fin Réponse
+
 - (Question) Supprimer tous les comptes de la ville de Nicholson (Utiliser _delete_by_query)
 
 ### GET API
