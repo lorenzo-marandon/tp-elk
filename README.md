@@ -501,6 +501,30 @@ Le tableau de bord a été nommé `Dashboard - Comptes bancaires` et enregistré
 
 - (Question) 16. Exécuter une requête dans la barre de recherche situé au dessus et remarquez que les visuels se mettent automatiquement à jour.
 
+**Réponse :**
+
+Nous avons testé le filtrage dynamique du Dashboard à l'aide de la barre de recherche DQL.
+
+Deux requêtes ont été exécutées :
+
+```text
+state.keyword: "CA"
+```
+
+Cette première requête limite les visualisations aux comptes situés en Californie. La somme des soldes passe de **25 674 297** à **382 804**, et le graphique par État n'affiche plus que `CA`.
+
+```text
+balance > 30000
+```
+
+Cette seconde requête conserve uniquement les comptes dont le solde dépasse 30 000. La somme des soldes affichée devient **16 152 752**.
+
+Dans les deux cas, les trois visualisations (métrique, graphique en barres et nuage de mots) se recalculent en fonction des documents sélectionnés.
+
+Cela démontre que les Dashboards OpenSearch permettent d'explorer les données de manière interactive, en appliquant des filtres communs à plusieurs visualisations.
+
+#Fin Réponse
+
 # Partie 2 - Gestion de documents textuels
 
 Dans cette partie nous allons travailler avec des données principalement textuelles et nous allons palper la puissance d'OpenSearch en tant que moteur de recherche plein texte.
