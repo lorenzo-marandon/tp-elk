@@ -348,6 +348,7 @@ GET /bank/_search
 Cette seconde requête retourne 20 documents, tandis que le nombre total de documents correspondants reste de 999.
 
 La requête `match_all` permet donc de sélectionner tous les documents d'un index sans appliquer de condition de filtrage.
+
 #Fin Réponse
 
 - (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
@@ -426,6 +427,8 @@ Cette métrique permet d'additionner les valeurs du champ numérique `balance` p
 
 La visualisation a été enregistrée sous le nom `Somme des soldes`.
 
+#Fin Réponse
+
 - (Question) 13. Graphique barre affichant la moyenne des soldes (champ balance) selon l’état (champ state). Sauver le graphique.
 
 **Réponse :**
@@ -447,7 +450,6 @@ Le graphique obtenu montre que la tranche **30–39 ans** est la plus représent
 La visualisation a été enregistrée sous le nom `Répartition des comptes par âge`.
 
 #Fin réponse
-
 
 
 - (Question) 14. Nuage de mots représentant les villes dans lesquelles il y a le plus de comptes. Sauver le graphique.
