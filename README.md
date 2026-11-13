@@ -813,6 +813,28 @@ L'opérateur `~` active une recherche tolérant certaines différences orthograp
 
 - (Question) 26. En déduire le rôle de l’opérateur ~
 
+**Réponse :**
+
+L'opérateur `~`, placé après un terme, permet d'effectuer une **recherche approximative (*fuzzy search*)**.
+
+Cette recherche accepte certaines différences orthographiques entre le terme saisi et les termes indexés, en s'appuyant sur une distance d'édition.
+
+Par exemple, `cesar~` permet de retrouver `caesar`, car une seule insertion de caractère est nécessaire pour passer de `cesar` à `caesar`.
+
+On peut également préciser le nombre maximal d'éditions autorisées :
+
+```text
+cesar~1
+```
+
+L'opérateur `~` est donc particulièrement utile pour gérer les fautes de frappe et améliorer le rappel d'un moteur de recherche.
+
+Dans notre expérience, son utilisation fait passer le nombre de résultats de **0 à 3 412 documents**.
+
+#Fin Réponse
+
+
+
 ### AGGREGATION API
 
 Documentation : https://docs.opensearch.org/latest/aggregations/ ou https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html (mieux expliqué mais attention à la compatibilité)
