@@ -262,28 +262,45 @@ GET /bank/_count
 #Fin Réponse
 
 ### GET API
-- (Question) Obtenir le compte dont l’ID est 2
-- (Question) Idem mais récupérer uniquement le source (champs _source)
-- (Question) Idem mais en ne sélectionnant que le nom et le prénom (firstname, lastname)
+- (Question) 6. Obtenir le compte dont l’ID est 2
+
+**Réponse :**
+
+Pour récupérer le compte dont l'identifiant est `2`, nous utilisons l'API GET :
+
+```http
+GET /bank/_doc/2
+```
+
+La requête renvoie un code HTTP `200 OK` et `"found": true`, ce qui confirme que le document existe.
+
+Les informations du compte sont présentes dans `_source`. Il appartient à **Roberta Bender**, âgée de 22 ans, avec un solde de **28 838**, résidant à Bennett (LA).
+
+La réponse contient également des métadonnées, notamment `_index`, `_id` et `_version`.
+
+#Réponse
+
+- (Question) 7. Idem mais récupérer uniquement le source (champs _source)
+- (Question) 8. Idem mais en ne sélectionnant que le nom et le prénom (firstname, lastname)
 
 ### SEARCH API
-- (Question) Retrouver tous les comptes
-- (Question) Retrouver tous les comptes dont la ville (champs city) est Belvoir
-- (Question) Retrouver tous les comptes dont la ville (champs city) est Belvoir ET l’employeur Xurban
+- (Question) 9. Retrouver tous les comptes
+- (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
+- (Question) 11. Retrouver tous les comptes dont la ville (champs city) est Belvoir ET l’employeur Xurban
 
 ## Visualisation des données avec OpenSearch Dashboards
 Avant de créer des visuels, déclarez l'index à OpenSearch Dashboards : menu `Dashboards Management` › `Index patterns` › `Create index pattern`, saisissez `bank`, puis validez.
 
 Aller ensuite sur l’onglet Visualize et créer les visuels suivants :
 
-- (Question) Métrique affichant la somme des soldes de tous les comptes. Sauver le graphique.
-- (Question) Graphique barre affichant la moyenne des soldes (champ balance) selon l’état (champ state). Sauver le graphique.
-- (Question) Nuage de mots représentant les villes dans lesquelles il y a le plus de comptes. Sauver le graphique.
+- (Question) 12. Métrique affichant la somme des soldes de tous les comptes. Sauver le graphique.
+- (Question) 13. Graphique barre affichant la moyenne des soldes (champ balance) selon l’état (champ state). Sauver le graphique.
+- (Question) 14. Nuage de mots représentant les villes dans lesquelles il y a le plus de comptes. Sauver le graphique.
 
 Rendez-vous ensuite sur l’onglet Dashboard puis : 
 
-- (Question) Réaliser un tableau de bord regroupant les 3 visuels précédents.
-- (Question) Exécuter une requête dans la barre de recherche situé au dessus et remarquez que les visuels se mettent automatiquement à jour.
+- (Question) 15. Réaliser un tableau de bord regroupant les 3 visuels précédents.
+- (Question) 16. Exécuter une requête dans la barre de recherche situé au dessus et remarquez que les visuels se mettent automatiquement à jour.
 
 # Partie 2 - Gestion de documents textuels
 
@@ -316,23 +333,23 @@ Vous pouvez répondre à toutes les questions en utilisant cette syntaxe :
 GET shakespeare/_search?q=query OR champ:query
 ```
 
-- (Question) Rechercher les documents contenant le terme KING dans les champs text_entry OU play_name. Accordez deux fois plus d’importance aux documents qui contiennent le terme dans le champ play_name (astuce : KING^2).
-- (Question) Rechercher les documents où l’orateur (champ speaker) CAESAR parle de Brutus (champ text_entry)
-- (Question) Rechercher les documents où l’orateur(champ speaker) CAESAR ne parle PAS de Brutus (champ text_entry)
-- (Question) Rechercher les documents répondant à la requête `caesar brutus calpurnia`
-- (Question) Selon vous, pourquoi le quatrième document, qui contient tous les termes, n’est pas en première position ?
-- (Question) Modifier la requête pour que seul le quatrième document réponde.
-- (Question) Rechercher les documents répondant à la requête cesar (la faute est volontaire)
-- (Question) Pourquoi aucun document ne répond ?
-- (Question) Essayez maintenant avec la requête cesar~ 
-- (Question) En déduire le rôle de l’opérateur ~
+- (Question) 17. Rechercher les documents contenant le terme KING dans les champs text_entry OU play_name. Accordez deux fois plus d’importance aux documents qui contiennent le terme dans le champ play_name (astuce : KING^2).
+- (Question) 18. Rechercher les documents où l’orateur (champ speaker) CAESAR parle de Brutus (champ text_entry)
+- (Question) 19. Rechercher les documents où l’orateur(champ speaker) CAESAR ne parle PAS de Brutus (champ text_entry)
+- (Question) 20. Rechercher les documents répondant à la requête `caesar brutus calpurnia`
+- (Question) 21. Selon vous, pourquoi le quatrième document, qui contient tous les termes, n’est pas en première position ?
+- (Question) 22. Modifier la requête pour que seul le quatrième document réponde.
+- (Question) 23. Rechercher les documents répondant à la requête cesar (la faute est volontaire)
+- (Question) 24. Pourquoi aucun document ne répond ?
+- (Question) 25. Essayez maintenant avec la requête cesar~ 
+- (Question) 26. En déduire le rôle de l’opérateur ~
 
 ### AGGREGATION API
 
 Documentation : https://docs.opensearch.org/latest/aggregations/ ou https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html (mieux expliqué mais attention à la compatibilité)
 
-- (Question) Trouver le nombre total de pièces (champ play_name)
-- (Question) En une requête, calculer le nombre de lignes (champ line_id) pour chaque pièce (champ play_name)
+- (Question) 27. Trouver le nombre total de pièces (champ play_name)
+- (Question) 28. En une requête, calculer le nombre de lignes (champ line_id) pour chaque pièce (champ play_name)
 
 # Partie 3 - Recherches sémantiques
 
@@ -478,8 +495,8 @@ GET <index>/_search?size=10
 }
 ```
 
-- (Question) Rechercher "Usage of artificial intelligence in medicine". Afficher les champs `headline`, `short_description`, `date` et `link`.
-- (Question) Rechercher les articles similaires à celui-ci https://www.huffpost.com/entry/15-comedy-documentaries-worth-watching-on-netflix-photos_n_1619966. Copier / coller le début de l'article dans la requête.
+- (Question) 29. Rechercher "Usage of artificial intelligence in medicine". Afficher les champs `headline`, `short_description`, `date` et `link`.
+- (Question) 30. Rechercher les articles similaires à celui-ci https://www.huffpost.com/entry/15-comedy-documentaries-worth-watching-on-netflix-photos_n_1619966. Copier / coller le début de l'article dans la requête.
 
 # Partie 4 - Pour aller plus loin : Logstash
 Logstash est un formidable outil pour le traitement et l’ingestion de données, notamment dans OpenSearch.
@@ -488,4 +505,4 @@ Logstash est un formidable outil pour le traitement et l’ingestion de données
 - Créer un dossier `pipeline` à la racine du dépôt et y placer uniquement votre configuration Logstash (fichier `.conf`) : Logstash charge tous les fichiers de ce dossier comme des configurations. Placer les données dans le dossier `data`, visible par Logstash sous `/usr/share/logstash/tp-data`. Décommenter ensuite les lignes `volumes` du service `logstash-oss` dans `docker-compose.yml` et relancer `docker compose up -d`
 - Télécharger la carte des hôtels classés en IDF ici https://www.data.gouv.fr/datasets/la-carte-des-hotels-classes-en-ile-de-france-idf
 puis écrire une configuration Logstash pour ingérer ces données dans OpenSearch
-- (Question) Développez un tableau de bord sur ces données. Ce tableau devra comporter une carte géographique des hôtels classés en fonction de leur nombre d’étoiles.
+- (Question) 31. Développez un tableau de bord sur ces données. Ce tableau devra comporter une carte géographique des hôtels classés en fonction de leur nombre d’étoiles.
