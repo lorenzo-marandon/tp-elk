@@ -740,6 +740,32 @@ Nous retrouvons exactement le quatrième document de la question précédente, q
 #Fin Réponse
 
 - (Question) 23. Rechercher les documents répondant à la requête cesar (la faute est volontaire)
+
+**Réponse :**
+
+Nous avons effectué une recherche plein texte avec le terme volontairement mal orthographié `cesar`.
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "cesar"
+    }
+  }
+}
+```
+
+**Résultats obtenus :**
+- Code HTTP : `200 OK`
+- Nombre de documents : **0**
+- `hits.hits` : tableau vide
+- `max_score` : `null`
+
+La requête est correctement exécutée, mais aucun document n'est retrouvé. La recherche lexicale classique ne considère pas automatiquement `cesar` comme une variante orthographique de `caesar`.
+
+#Fin Réponse
+
 - (Question) 24. Pourquoi aucun document ne répond ?
 - (Question) 25. Essayez maintenant avec la requête cesar~ 
 - (Question) 26. En déduire le rôle de l’opérateur ~
