@@ -454,6 +454,28 @@ La visualisation a été enregistrée sous le nom `Répartition des comptes par 
 
 - (Question) 14. Nuage de mots représentant les villes dans lesquelles il y a le plus de comptes. Sauver le graphique.
 
+**Réponse :**
+
+Nous avons créé une visualisation de type **Tag Cloud** dans OpenSearch Dashboards pour représenter les villes possédant le plus de comptes bancaires.
+
+Configuration :
+- **Index pattern :** `bank*`
+- **Type :** `Tag Cloud`
+- **Agrégation des tags :** `Terms`
+- **Champ :** `city.keyword`
+- **Métrique :** `Count`
+- **Tri :** décroissant selon le nombre de comptes
+- **Nombre maximal de villes :** `20`
+
+La taille des noms des villes dépend du nombre de comptes qui leur sont associés.
+
+Dans notre résultat, **Belvoir est affichée en plus grand**, avec deux comptes, tandis que les autres villes représentées possèdent généralement un compte chacune.
+
+Nous avons enregistré la visualisation sous le nom `Nuage de mots - Villes`.
+
+#Fin Réponse
+
+
 Rendez-vous ensuite sur l’onglet Dashboard puis : 
 
 - (Question) 15. Réaliser un tableau de bord regroupant les 3 visuels précédents.
