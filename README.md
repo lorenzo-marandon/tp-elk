@@ -782,7 +782,35 @@ Dans ce cas, `cesar` et `caesar` ont une distance d'édition de 1, puisqu'une se
 
 #Fin Réponse
 
-- (Question) 25. Essayez maintenant avec la requête cesar~ 
+- (Question) 25. Essayez maintenant avec la requête cesar~
+
+**Réponse :**
+
+Nous avons effectué une recherche approximative en ajoutant l'opérateur `~` au terme volontairement mal orthographié `cesar`.
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "cesar~"
+    }
+  }
+}
+```
+
+**Résultats obtenus :**
+- Code HTTP : `200 OK`
+- Nombre de documents : **3 412**
+- Score maximal : `3.271912`
+- Premier document : `47514`, pièce *Julius Caesar*, contenant « Pardon, Caesar; Caesar, pardon: ».
+
+Contrairement à la recherche exacte `cesar`, qui ne retournait aucun document, la recherche approximative retrouve des documents contenant `Caesar`.
+
+L'opérateur `~` active une recherche tolérant certaines différences orthographiques, en utilisant la distance d'édition entre les termes.
+
+#Fin Réponse
+
 - (Question) 26. En déduire le rôle de l’opérateur ~
 
 ### AGGREGATION API
