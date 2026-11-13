@@ -596,6 +596,36 @@ Les deux requêtes ont renvoyé les mêmes résultats.
 #Fin Réponse
 
 - (Question) 18. Rechercher les documents où l’orateur (champ speaker) CAESAR parle de Brutus (champ text_entry)
+
+**Réponse :**
+
+Pour rechercher les passages où César parle de Brutus, nous utilisons une requête `query_string` combinant deux conditions avec l'opérateur logique `AND`.
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "speaker:CAESAR AND text_entry:Brutus"
+    }
+  }
+}
+```
+
+La première condition sélectionne les documents dont l'orateur (`speaker`) est `CAESAR`. La seconde recherche le terme `Brutus` dans le champ `text_entry`.
+
+**Résultats obtenus :**
+- Code HTTP : `200 OK`
+- Nombre de documents : **7**
+- Score maximal : `6.757757`
+- Premier résultat : document `47513`, pièce *Julius Caesar*, ligne `3.1.59`, contenant « What, Brutus! ».
+
+On constate que certains résultats correspondent à des indications scéniques plutôt qu'à des dialogues. Cela s'explique par la structure du jeu de données, dans lequel ces indications peuvent également être associées à l'orateur `CAESAR`.
+
+Cette recherche illustre l'utilisation de l'opérateur `AND` pour combiner plusieurs critères textuels.
+
+#Fin Réponse
+
 - (Question) 19. Rechercher les documents où l’orateur(champ speaker) CAESAR ne parle PAS de Brutus (champ text_entry)
 - (Question) 20. Rechercher les documents répondant à la requête `caesar brutus calpurnia`
 - (Question) 21. Selon vous, pourquoi le quatrième document, qui contient tous les termes, n’est pas en première position ?
