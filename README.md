@@ -871,6 +871,55 @@ Il ne faut pas confondre le nombre de pièces avec le nombre total de documents 
 
 - (Question) 28. En une requête, calculer le nombre de lignes (champ line_id) pour chaque pièce (champ play_name)
 
+
+**Réponse :**
+
+Pour déterminer le nombre de lignes de chaque pièce de Shakespeare en une seule requête, nous utilisons une agrégation `terms` sur le champ `play_name.keyword`.
+
+```http
+GET /shakespeare/_search
+{
+  "size": 0,
+  "query": {
+    "term": {
+      "type.keyword": "line"
+    }
+  },
+  "aggs": {
+    "lignes_par_piece": {
+      "terms": {
+        "field": "play_name.keyword",
+        "size": 50,
+        "order": {
+          "_count": "desc"
+        }
+      }
+    }
+  }
+}
+```
+
+Le filtre `type.keyword: line` sélectionne les documents correspondant aux lignes. L'agrégation `terms` regroupe ensuite ces documents par titre de pièce et `doc_count` indique le nombre de lignes associées à chaque pièce.
+
+**Résultats obtenus :**
+
+| Pièce | Nombre de lignes |
+|---|---:|
+| Hamlet | 4 219 |
+| Coriolanus | 3 958 |
+| Cymbeline | 3 927 |
+| Richard III | 3 911 |
+| Antony and Cleopatra | 3 815 |
+
+Les résultats sont triés par nombre de lignes décroissant.
+
+Le paramètre `size: 50` permet de récupérer les groupes correspondant aux 36 pièces du jeu de données. Les champs `sum_other_doc_count: 0` et `doc_count_error_upper_bound: 0` indiquent qu'aucun document n'est exclu des groupes retournés et qu'aucune erreur de comptage n'est signalée.
+
+Cette requête permet donc d'obtenir les nombres de lignes par pièce en une seule opération d'agrégation.
+
+#Fin Réponse
+
+
 # Partie 3 - Recherches sémantiques
 
 Les recherches réalisées précédemment sont principalement des recherches par mots ou par phrases basées sur le modèle `BM25`, le modèle par défaut d'OpenSearch, de la même famille que `tf-idf`. Ces modèles construisent un espace vectoriel dont la taille est égale au nombre total de tokens distincts dans la collection de documents. L'image ci-dessous représente un espace vectoriel avec 3 tokens distincts. Imaginez ce que cela donnerait avec 100,000 tokens distincts !
