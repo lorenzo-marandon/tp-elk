@@ -318,19 +318,26 @@ Cette méthode permet de limiter les données transmises lorsqu'on n'a besoin qu
 
 ### SEARCH API
 - (Question) 9. Retrouver tous les comptes
+**Réponse :**
 
-Réponse :
-Pour retrouver tous les comptes bancaires, nous utilisons l'API Search avec la requête match_all :
+Pour retrouver tous les comptes bancaires, nous utilisons l'API Search avec la requête `match_all` :
+
+```http
 GET /bank/_search
 {
   "query": {
     "match_all": {}
   }
 }
-La requête match_all correspond à tous les documents présents dans l'index bank, sans appliquer de filtre.
-Par défaut, OpenSearch ne renvoie que les 10 premiers documents, même si la recherche correspond à davantage de résultats. Le nombre total de documents correspondants est indiqué par hits.total.value.
-Le paramètre size permet de modifier le nombre de documents retournés dans la réponse.
+```
 
+La requête `match_all` correspond à tous les documents présents dans l'index `bank`, sans appliquer de filtre.
+
+Par défaut, OpenSearch ne renvoie que les 10 premiers documents, même si la recherche correspond à davantage de résultats. Le nombre total de documents correspondants est indiqué par `hits.total.value`.
+
+Le paramètre `size` permet de modifier le nombre de documents retournés dans la réponse.
+
+#Fin Réponse
 
 - (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
 - (Question) 11. Retrouver tous les comptes dont la ville (champs city) est Belvoir ET l’employeur Xurban
