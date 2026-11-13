@@ -281,6 +281,23 @@ La réponse contient également des métadonnées, notamment `_index`, `_id` et 
 #Réponse
 
 - (Question) 7. Idem mais récupérer uniquement le source (champs _source)
+
+**Réponse :**
+
+Pour récupérer uniquement le contenu `_source` du compte d'identifiant `2`, nous utilisons :
+
+```http
+GET /bank/_source/2
+```
+
+La requête renvoie un code `200 OK` et directement les champs du document, notamment `account_number`, `firstname`, `lastname`, `balance`, `age` et `city`.
+
+Contrairement à `GET /bank/_doc/2`, elle ne retourne pas les métadonnées OpenSearch (`_index`, `_id`, `_version`, etc.).
+
+Dans notre cas, nous obtenons les informations du compte de Roberta Bender, dont le solde est de 28 838.
+
+#Fin Réponse
+
 - (Question) 8. Idem mais en ne sélectionnant que le nom et le prénom (firstname, lastname)
 
 ### SEARCH API
