@@ -688,6 +688,27 @@ Les documents sont classés selon leur score de pertinence `_score`, calculé no
 #Fin Réponse
 
 - (Question) 21. Selon vous, pourquoi le quatrième document, qui contient tous les termes, n’est pas en première position ?
+
+**Réponse :**
+
+Le quatrième document contient les trois termes recherchés (`caesar`, `brutus`, `calpurnia`), mais n'obtient pas le meilleur score de pertinence.
+
+Cela s'explique par le fonctionnement du modèle **BM25**, utilisé par OpenSearch.
+
+Le classement ne dépend pas uniquement du nombre de mots de la requête présents dans un document. Il prend également en compte la fréquence des termes (TF), leur rareté dans la collection (IDF) et la longueur des champs.
+
+Le premier document contient un passage très court, « Calpurnia! », qui bénéficie notamment de la normalisation par la longueur. Le quatrième document, bien qu'il contienne les trois termes, possède un texte beaucoup plus long.
+
+Ainsi, un document contenant tous les termes recherchés n'est pas nécessairement mieux classé qu'un document contenant moins de termes.
+
+**Résultats observés :**
+- Premier document : `_score = 6.6660748`
+- Quatrième document : `_score = 6.0189724`
+
+La différence de score illustre le fonctionnement du classement par pertinence de BM25.
+
+#Fin Réponse
+
 - (Question) 22. Modifier la requête pour que seul le quatrième document réponde.
 - (Question) 23. Rechercher les documents répondant à la requête cesar (la faute est volontaire)
 - (Question) 24. Pourquoi aucun document ne répond ?
