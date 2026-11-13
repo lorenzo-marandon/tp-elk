@@ -39,7 +39,7 @@ opensearchproject/opensearch-dashboards:3
 bridge
 ```
 
-- (Question) Étudiez le fichier `docker-compose.yml` en vous aidant de la documentation https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/. Pour chaque service, expliquez son rôle, les ports exposés et les principaux paramètres (`discovery.type`, `node.roles`, `OPENSEARCH_JAVA_OPTS`, `healthcheck`, `depends_on`). Pourquoi la sécurité est-elle désactivée, et pourquoi ne faut-il jamais le faire en production ?
+- (Question) 1. Étudiez le fichier `docker-compose.yml` en vous aidant de la documentation https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/. Pour chaque service, expliquez son rôle, les ports exposés et les principaux paramètres (`discovery.type`, `node.roles`, `OPENSEARCH_JAVA_OPTS`, `healthcheck`, `depends_on`). Pourquoi la sécurité est-elle désactivée, et pourquoi ne faut-il jamais le faire en production ?
 
 
 ### Réponse Q1 - Installation de la suite ELK
@@ -131,7 +131,7 @@ Documentation utile : https://docs.opensearch.org/latest/.
 ## Requêtage simple 
 
 ### INDEX et UPDATE API
-- (Question) Après avoir étudié la structure d’un document, ajouter un nouveau compte dont l’ID est 10001
+- (Question) 2. Après avoir étudié la structure d’un document, ajouter un nouveau compte dont l’ID est 10001
 
 **Réponse :**
 
@@ -169,7 +169,7 @@ GET /bank/_doc/10001
 
 
 
-- (Question) Mettre à jour le compte précédent en modifiant l’adresse
+- (Question) 3. Mettre à jour le compte précédent en modifiant l’adresse
 
 **Réponse :**
 
@@ -200,7 +200,7 @@ Le résultat attendu est une mise à jour de l'adresse, tandis que les autres in
 
 
 ### DELETE API
-- (Question) Supprimer le compte précédemment créé
+- (Question) 4. Supprimer le compte précédemment créé
 
 **Réponse :**
 
@@ -222,7 +222,43 @@ La réponse doit contenir `"found": false`, ce qui confirme que le document n'ex
 
 #Fin Réponse
 
-- (Question) Supprimer tous les comptes de la ville de Nicholson (Utiliser _delete_by_query)
+- (Question) 5. Supprimer tous les comptes de la ville de Nicholson (Utiliser _delete_by_query)
+
+  **Réponse :**
+
+Pour supprimer tous les comptes associés à la ville de Nicholson, nous utilisons l'API `_delete_by_query`, qui permet de supprimer plusieurs documents répondant à une condition.
+
+```http
+POST /bank/_delete_by_query
+{
+  "query": {
+    "term": {
+      "city.keyword": "Nicholson"
+    }
+  }
+}
+```
+
+La requête `term` cible exactement la valeur `Nicholson` dans le champ `city.keyword`.
+
+Contrairement à l'API Delete classique, qui supprime un document à partir de son identifiant, `_delete_by_query` supprime tous les documents correspondant au critère spécifié.
+
+Nous vérifions ensuite le résultat avec :
+
+```http
+GET /bank/_count
+{
+  "query": {
+    "term": {
+      "city.keyword": "Nicholson"
+    }
+  }
+}
+```
+
+Un résultat `count: 0` confirme qu'aucun compte correspondant à cette ville ne subsiste.
+
+#Fin Réponse
 
 ### GET API
 - (Question) Obtenir le compte dont l’ID est 2
