@@ -482,6 +482,23 @@ Nous avons enregistré la visualisation sous le nom `Nuage de mots - Villes`.
 Rendez-vous ensuite sur l’onglet Dashboard puis : 
 
 - (Question) 15. Réaliser un tableau de bord regroupant les 3 visuels précédents.
+
+**Réponse :**
+
+Nous avons créé un Dashboard dans OpenSearch Dashboards afin de regrouper les trois visualisations réalisées précédemment.
+
+Il contient :
+
+- **Somme des soldes :** visualisation Metric affichant un total de **25 674 297**.
+- **Solde moyen par État :** graphique en barres verticales comparant les moyennes du champ `balance` pour chaque valeur de `state.keyword`.
+- **Nuage de mots des villes :** visualisation Tag Cloud représentant les villes selon leur nombre de comptes bancaires.
+
+Ces visualisations permettent d'obtenir une vue d'ensemble des données bancaires, en combinant un indicateur global, une comparaison géographique et une représentation de la répartition des comptes par ville.
+
+Le tableau de bord a été nommé `Dashboard - Comptes bancaires` et enregistré pour pouvoir être consulté ultérieurement.
+
+#Fin Réponse
+
 - (Question) 16. Exécuter une requête dans la barre de recherche situé au dessus et remarquez que les visuels se mettent automatiquement à jour.
 
 # Partie 2 - Gestion de documents textuels
