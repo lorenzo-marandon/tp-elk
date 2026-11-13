@@ -627,6 +627,36 @@ Cette recherche illustre l'utilisation de l'opérateur `AND` pour combiner plusi
 #Fin Réponse
 
 - (Question) 19. Rechercher les documents où l’orateur(champ speaker) CAESAR ne parle PAS de Brutus (champ text_entry)
+
+**Réponse :**
+
+Pour retrouver les passages attribués à César qui ne contiennent pas le terme `Brutus`, nous utilisons une requête `query_string` avec les opérateurs `AND` et `NOT`.
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "speaker:CAESAR AND NOT text_entry:Brutus"
+    }
+  }
+}
+```
+
+L'opérateur `AND` impose que l'orateur soit `CAESAR`, tandis que `NOT` exclut les documents contenant le terme `Brutus` dans `text_entry`.
+
+**Résultats obtenus :**
+- Code HTTP : `200 OK`
+- Nombre de documents : **590**
+- Score maximal : `2.6360264`
+- Premier résultat : document `46337`, pièce *Julius Caesar*, ligne `1.2.1`, contenant « Calpurnia! ».
+
+En comparaison, la question précédente retournait 7 documents mentionnant Brutus. Nous obtenons donc 597 documents attribués à César au total, dont 590 ne mentionnent pas Brutus.
+
+Cette requête illustre l'utilisation d'une condition d'exclusion dans une recherche plein texte.
+
+#Fin Réponse
+
 - (Question) 20. Rechercher les documents répondant à la requête `caesar brutus calpurnia`
 - (Question) 21. Selon vous, pourquoi le quatrième document, qui contient tous les termes, n’est pas en première position ?
 - (Question) 22. Modifier la requête pour que seul le quatrième document réponde.
