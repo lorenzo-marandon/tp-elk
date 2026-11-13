@@ -557,6 +557,44 @@ GET shakespeare/_search?q=query OR champ:query
 ```
 
 - (Question) 17. Rechercher les documents contenant le terme KING dans les champs text_entry OU play_name. Accordez deux fois plus d’importance aux documents qui contiennent le terme dans le champ play_name (astuce : KING^2).
+
+**Réponse :**
+
+Pour rechercher les documents contenant le terme `KING` dans les champs `text_entry` ou `play_name`, nous utilisons l'API Search et une requête `query_string`.
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "text_entry:KING OR play_name:KING^2"
+    }
+  }
+}
+```
+
+L'opérateur `OR` permet de retrouver les documents dont au moins un des deux champs contient le terme recherché.
+
+L'opérateur `^2` applique un facteur de pondération (*boost*) de 2 aux correspondances dans `play_name`, ce qui augmente leur contribution au score de pertinence.
+
+**Résultats obtenus :**
+- Code HTTP : `200 OK`
+- Nombre de documents correspondants : **7 837**
+- Score maximal : **5,9573455**
+- Premier résultat : *King Lear*, document `51205`, contenant le texte « A king, a king! ».
+
+Le score de pertinence `_score` est calculé notamment à l'aide de BM25. Le boost favorise les correspondances dans le titre, mais ne garantit pas leur présence systématique en première position.
+
+Nous avons également testé la syntaxe courte :
+
+```http
+GET /shakespeare/_search?q=text_entry:KING OR play_name:KING^2
+```
+
+Les deux requêtes ont renvoyé les mêmes résultats.
+
+#Fin Réponse
+
 - (Question) 18. Rechercher les documents où l’orateur (champ speaker) CAESAR parle de Brutus (champ text_entry)
 - (Question) 19. Rechercher les documents où l’orateur(champ speaker) CAESAR ne parle PAS de Brutus (champ text_entry)
 - (Question) 20. Rechercher les documents répondant à la requête `caesar brutus calpurnia`
