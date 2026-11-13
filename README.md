@@ -767,6 +767,21 @@ La requête est correctement exécutée, mais aucun document n'est retrouvé. La
 #Fin Réponse
 
 - (Question) 24. Pourquoi aucun document ne répond ?
+
+**Réponse :**
+
+Aucun document n'est retrouvé car OpenSearch réalise par défaut une recherche lexicale sur les termes indexés, sans correction automatique des fautes d'orthographe.
+
+Le terme recherché `cesar` est différent du terme `caesar` présent dans les textes de Shakespeare.
+
+L'analyseur standard permet notamment de normaliser la casse, mais ne corrige pas automatiquement cette différence orthographique.
+
+Pour retrouver des documents malgré une faute de frappe, il est possible d'utiliser une **recherche approximative (*fuzzy search*)**, basée sur la distance de Levenshtein.
+
+Dans ce cas, `cesar` et `caesar` ont une distance d'édition de 1, puisqu'une seule insertion de caractère est nécessaire pour passer de l'un à l'autre.
+
+#Fin Réponse
+
 - (Question) 25. Essayez maintenant avec la requête cesar~ 
 - (Question) 26. En déduire le rôle de l’opérateur ~
 
