@@ -132,6 +132,43 @@ Documentation utile : https://docs.opensearch.org/latest/.
 
 ### INDEX et UPDATE API
 - (Question) Après avoir étudié la structure d’un document, ajouter un nouveau compte dont l’ID est 10001
+
+**Réponse :**
+
+Pour créer un nouveau compte bancaire avec l'identifiant `10001`, nous utilisons l'API **Index** d'OpenSearch avec la méthode HTTP `PUT`.
+
+```http
+PUT /bank/_doc/10001
+{
+  "account_number": 10001,
+  "firstname": "Jean",
+  "lastname": "Dupont",
+  "age": 25,
+  "gender": "M",
+  "address": "15 Rue Victor Hugo",
+  "employer": "OpenAI",
+  "email": "jean.dupont@example.com",
+  "city": "Toulon",
+  "state": "PACA",
+  "balance": 15000
+}
+```
+
+L'index `bank` contient les comptes bancaires. L'identifiant `10001` dans l'URL correspond au champ `_id` utilisé par OpenSearch, tandis que `account_number` représente le numéro de compte dans le document JSON.
+
+La méthode `PUT` permet ici de créer le document avec un identifiant explicitement défini. Si cet identifiant existe déjà, son contenu est remplacé.
+
+Nous pouvons vérifier le document créé avec :
+
+```http
+GET /bank/_doc/10001
+```
+
+#Fin Réponse
+
+
+
+
 - (Question) Mettre à jour le compte précédent en modifiant l’adresse
 
 ### DELETE API
