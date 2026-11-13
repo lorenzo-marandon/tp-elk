@@ -840,6 +840,35 @@ Dans notre expérience, son utilisation fait passer le nombre de résultats de *
 Documentation : https://docs.opensearch.org/latest/aggregations/ ou https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html (mieux expliqué mais attention à la compatibilité)
 
 - (Question) 27. Trouver le nombre total de pièces (champ play_name)
+
+**Réponse :**
+
+Pour déterminer le nombre de pièces différentes présentes dans l'index `shakespeare`, nous utilisons une agrégation `cardinality`.
+
+```http
+GET /shakespeare/_search
+{
+  "size": 0,
+  "aggs": {
+    "nombre_pieces": {
+      "cardinality": {
+        "field": "play_name.keyword"
+      }
+    }
+  }
+}
+```
+
+L'agrégation `cardinality` estime le nombre de valeurs distinctes du champ `play_name.keyword`, tandis que `size: 0` évite de retourner les documents individuels.
+
+**Résultat obtenu :** `nombre_pieces.value = 36`.
+
+Notre jeu de données contient donc **36 titres de pièces distincts** selon cette agrégation.
+
+Il ne faut pas confondre le nombre de pièces avec le nombre total de documents indexés (111 396).
+
+#Fin Réponse
+
 - (Question) 28. En une requête, calculer le nombre de lignes (champ line_id) pour chaque pièce (champ play_name)
 
 # Partie 3 - Recherches sémantiques
