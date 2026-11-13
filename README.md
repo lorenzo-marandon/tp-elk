@@ -658,6 +658,35 @@ Cette requête illustre l'utilisation d'une condition d'exclusion dans une reche
 #Fin Réponse
 
 - (Question) 20. Rechercher les documents répondant à la requête `caesar brutus calpurnia`
+
+
+**Réponse :**
+
+Nous avons effectué une recherche plein texte sur les termes `caesar brutus calpurnia` :
+
+```http
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "query": "caesar brutus calpurnia"
+    }
+  }
+}
+```
+
+En l'absence d'opérateur explicite, les termes sont combinés avec un `OR` par défaut. Un document peut donc être retourné même s'il ne contient qu'une partie des mots recherchés.
+
+**Résultats obtenus :**
+- Nombre de documents correspondants : **3 692**
+- Score maximal : `6.6660748`
+- Premier document : `46337`, contenant « Calpurnia! »
+- Quatrième document : `46336`, contenant les trois termes recherchés.
+
+Les documents sont classés selon leur score de pertinence `_score`, calculé notamment avec BM25. Ce classement ne dépend pas uniquement du nombre de termes présents, mais aussi de leur fréquence, de leur rareté et de la longueur des champs.
+
+#Fin Réponse
+
 - (Question) 21. Selon vous, pourquoi le quatrième document, qui contient tous les termes, n’est pas en première position ?
 - (Question) 22. Modifier la requête pour que seul le quatrième document réponde.
 - (Question) 23. Rechercher les documents répondant à la requête cesar (la faute est volontaire)
