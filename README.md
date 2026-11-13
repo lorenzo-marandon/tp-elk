@@ -42,7 +42,7 @@ bridge
 - (Question) Étudiez le fichier `docker-compose.yml` en vous aidant de la documentation https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/. Pour chaque service, expliquez son rôle, les ports exposés et les principaux paramètres (`discovery.type`, `node.roles`, `OPENSEARCH_JAVA_OPTS`, `healthcheck`, `depends_on`). Pourquoi la sécurité est-elle désactivée, et pourquoi ne faut-il jamais le faire en production ?
 
 
-### Réponse — Installation de la suite ELK
+### Réponse Q1 - Installation de la suite ELK
 
 Le fichier `docker-compose.yml` définit trois services fonctionnant dans des conteneurs Docker :
 
@@ -66,6 +66,7 @@ Cette configuration ne doit pas être utilisée en production, car elle pourrait
 
 **Vérification :** les trois conteneurs ont été démarrés avec Docker Compose. L'API REST d'OpenSearch répond correctement, et la requête `GET /_cluster/health` retourne un statut `green`, avec un seul nœud et aucune partition non allouée.
 
+#Fin de réponse
 
 ## Préparation de la machine
 
