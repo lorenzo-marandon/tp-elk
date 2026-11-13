@@ -171,6 +171,34 @@ GET /bank/_doc/10001
 
 - (Question) Mettre à jour le compte précédent en modifiant l’adresse
 
+**Réponse :**
+
+Pour modifier l'adresse du compte `10001`, nous utilisons l'API Update d'OpenSearch.
+
+```http
+POST /bank/_update/10001
+{
+  "doc": {
+    "address": "42 Avenue de la République"
+  }
+}
+```
+
+Cette requête permet de modifier uniquement le champ `address` du document, sans remplacer les autres champs.
+
+Nous vérifions ensuite la modification avec :
+
+```http
+GET /bank/_doc/10001
+```
+
+Le résultat attendu est une mise à jour de l'adresse, tandis que les autres informations du compte sont conservées.
+
+#Fin Réponse
+
+
+
+
 ### DELETE API
 - (Question) Supprimer le compte précédemment créé
 - (Question) Supprimer tous les comptes de la ville de Nicholson (Utiliser _delete_by_query)
