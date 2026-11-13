@@ -352,9 +352,10 @@ La requête `match_all` permet donc de sélectionner tous les documents d'un ind
 
 - (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
 
+
 **Réponse :**
 
-Pour rechercher les comptes situés dans la ville de Belvoir, nous utilisons l'API Search avec une requête `term` :
+Pour retrouver les comptes situés dans la ville de Belvoir, nous utilisons une requête `term` sur le champ `city.keyword` :
 
 ```http
 GET /bank/_search
@@ -367,9 +368,11 @@ GET /bank/_search
 }
 ```
 
-Cette requête sélectionne les documents dont le champ `city.keyword` correspond exactement à `Belvoir`.
+La requête retourne un code `200 OK` et **2 comptes correspondants**, dont les identifiants sont `108` et `999`.
 
-Le champ `hits.total.value` indique le nombre de comptes trouvés, tandis que `hits.hits` contient les documents correspondants.
+Le champ `city.keyword` permet une comparaison exacte, contrairement au champ `city` analysé pour la recherche textuelle.
+
+Le nombre de résultats est indiqué par `hits.total.value = 2`.
 
 #Fin Réponse
 
