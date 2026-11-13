@@ -351,6 +351,28 @@ La requête `match_all` permet donc de sélectionner tous les documents d'un ind
 #Fin Réponse
 
 - (Question) 10. Retrouver tous les comptes dont la ville (champs city) est Belvoir
+
+**Réponse :**
+
+Pour rechercher les comptes situés dans la ville de Belvoir, nous utilisons l'API Search avec une requête `term` :
+
+```http
+GET /bank/_search
+{
+  "query": {
+    "term": {
+      "city.keyword": "Belvoir"
+    }
+  }
+}
+```
+
+Cette requête sélectionne les documents dont le champ `city.keyword` correspond exactement à `Belvoir`.
+
+Le champ `hits.total.value` indique le nombre de comptes trouvés, tandis que `hits.hits` contient les documents correspondants.
+
+#Fin Réponse
+
 - (Question) 11. Retrouver tous les comptes dont la ville (champs city) est Belvoir ET l’employeur Xurban
 
 ## Visualisation des données avec OpenSearch Dashboards
